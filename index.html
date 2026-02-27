@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pisang Keju Zahrah – Oleh-Oleh Favorit Kota Mojokerto</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #FFD600;
+    --yellow-light: #FFF9C4;
+    --yellow-dark: #F9A825;
+    --green: #2E7D32;
+    --green-light: #43A047;
+    --green-dark: #1B5E20;
+    --red: #E53935;
+    --white: #FFFFFF;
+    --cream: #FFFDE7;
+    --dark: #1A1A1A;
+    --gray: #666;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--white);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: var(--green-dark);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 64px;
+    box-shadow: 0 2px 20px rgba(0,0,0,.3);
+  }
+  .nav-logo {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    color: var(--yellow);
+    letter-spacing: .5px;
+  }
+  .nav-logo span { color: var(--white); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,.85);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: .9rem;
+    letter-spacing: .3px;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--yellow); }
+  .nav-order {
+    background: var(--yellow);
+    color: var(--green-dark) !important;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-weight: 900 !important;
+  }
+  .nav-order:hover { background: var(--yellow-dark) !important; color: var(--white) !important; }
+
+  /* hamburger */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 26px; height: 3px; background: var(--yellow); border-radius: 3px; transition: .3s; }
+
+  /* ── HERO ── */
+  #beranda {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow-dark) 60%, #FF8F00 100%);
+    display: flex; align-items: center;
+    padding: 80px 5% 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-circles {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .hero-bg-circles span {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,.08);
+  }
+  .hero-bg-circles span:nth-child(1) { width: 400px; height: 400px; top: -100px; right: -80px; }
+  .hero-bg-circles span:nth-child(2) { width: 250px; height: 250px; bottom: 50px; left: -60px; }
+  .hero-bg-circles span:nth-child(3) { width: 150px; height: 150px; top: 200px; left: 30%; }
+  .hero-content { max-width: 560px; z-index: 1; animation: fadeUp .8s ease both; }
+  .hero-badge {
+    display: inline-block;
+    background: var(--green-dark);
+    color: var(--yellow);
+    font-size: .8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 18px;
+  }
+  .hero-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    color: var(--green-dark);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .hero-title span { color: var(--white); }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--green-dark);
+    opacity: .85;
+    margin-bottom: 32px;
+    max-width: 400px;
+    font-weight: 600;
+    line-height: 1.6;
+  }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--green-dark);
+    color: var(--white);
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-weight: 900;
+    font-size: 1rem;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    box-shadow: 0 4px 20px rgba(27,94,32,.4);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(27,94,32,.5); }
+  .btn-secondary {
+    background: rgba(255,255,255,.3);
+    color: var(--green-dark);
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-weight: 900;
+    font-size: 1rem;
+    text-decoration: none;
+    border: 2px solid var(--green-dark);
+    transition: background .2s;
+  }
+  .btn-secondary:hover { background: rgba(255,255,255,.5); }
+  .hero-img {
+    position: absolute; right: 5%; bottom: 0;
+    width: clamp(280px, 40vw, 500px);
+    animation: floatBob 4s ease-in-out infinite;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,.25));
+  }
+  .hero-emoji {
+    font-size: clamp(6rem, 22vw, 16rem);
+    line-height: 1;
+    display: block;
+    position: absolute; right: 6%; bottom: 20px;
+    animation: floatBob 4s ease-in-out infinite;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,.18));
+    pointer-events: none;
+  }
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 40px; flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.8rem;
+    color: var(--green-dark);
+  }
+  .stat-lbl { font-size: .75rem; font-weight: 700; color: var(--green-dark); opacity: .75; text-transform: uppercase; }
+
+  /* ── WAVE ── */
+  .wave-divider { display: block; width: 100%; overflow: hidden; line-height: 0; }
+  .wave-divider svg { display: block; width: 100%; }
+
+  /* ── SECTION BASE ── */
+  section { padding: 80px 5%; }
+  .section-label {
+    font-size: .78rem; font-weight: 900; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--green);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--dark);
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .section-title .accent { color: var(--green); }
+  .section-sub { font-size: 1rem; color: var(--gray); max-width: 520px; line-height: 1.7; }
+
+  /* ── TENTANG ── */
+  #tentang { background: var(--cream); }
+  .tentang-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 48px;
+  }
+  .tentang-img-wrap {
+    position: relative;
+  }
+  .tentang-img-box {
+    background: linear-gradient(135deg, var(--yellow), var(--yellow-dark));
+    border-radius: 32px;
+    height: 340px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8rem;
+    box-shadow: 0 12px 40px rgba(255,214,0,.4);
+  }
+  .tentang-badge {
+    position: absolute; bottom: -16px; left: 50%; transform: translateX(-50%);
+    background: var(--green-dark);
+    color: var(--white);
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 900;
+    white-space: nowrap;
+    font-size: .9rem;
+    box-shadow: 0 4px 16px rgba(27,94,32,.4);
+  }
+  .tentang-points { margin-top: 28px; display: flex; flex-direction: column; gap: 16px; }
+  .point {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: var(--white);
+    padding: 16px 20px;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  }
+  .point-icon {
+    width: 42px; height: 42px; min-width: 42px;
+    background: var(--yellow);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .point-text h4 { font-weight: 800; font-size: .95rem; margin-bottom: 2px; }
+  .point-text p { font-size: .85rem; color: var(--gray); }
+
+  /* ── MENU ── */
+  #menu { background: var(--white); }
+  .menu-tabs {
+    display: flex; gap: 12px; margin: 36px 0 32px; flex-wrap: wrap;
+  }
+  .tab-btn {
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: .9rem;
+    cursor: pointer;
+    border: 2px solid var(--green);
+    background: transparent;
+    color: var(--green);
+    transition: .2s;
+  }
+  .tab-btn.active, .tab-btn:hover {
+    background: var(--green);
+    color: var(--white);
+  }
+  .menu-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px;
+  }
+  .menu-panel { display: none; }
+  .menu-panel.active { display: block; }
+  .menu-card {
+    background: var(--cream);
+    border-radius: 20px;
+    padding: 24px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform .2s, box-shadow .2s;
+    border: 2px solid transparent;
+  }
+  .menu-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,.1); border-color: var(--yellow); }
+  .menu-card-emoji { font-size: 3rem; margin-bottom: 12px; display: block; }
+  .menu-card h3 { font-weight: 900; font-size: 1rem; margin-bottom: 6px; }
+  .menu-card .price {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.4rem;
+    color: var(--green);
+  }
+  .menu-card .price-note { font-size: .75rem; color: var(--gray); }
+  .menu-card-badge {
+    position: absolute; top: 12px; right: 12px;
+    background: var(--yellow);
+    color: var(--green-dark);
+    font-size: .65rem;
+    font-weight: 900;
+    padding: 3px 10px;
+    border-radius: 50px;
+    text-transform: uppercase;
+  }
+  .menu-order-btn {
+    display: block;
+    text-align: center;
+    margin-top: 40px;
+  }
+  .btn-wa {
+    background: #25D366;
+    color: var(--white);
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-weight: 900;
+    font-size: 1.05rem;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 10px;
+    box-shadow: 0 4px 20px rgba(37,211,102,.4);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(37,211,102,.5); }
+
+  /* ── GALERI ── */
+  #galeri { background: var(--green-dark); }
+  #galeri .section-label { color: var(--yellow); }
+  #galeri .section-title { color: var(--white); }
+  #galeri .accent { color: var(--yellow); }
+  #galeri .section-sub { color: rgba(255,255,255,.7); }
+  .galeri-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .galeri-item {
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, var(--yellow), var(--yellow-dark));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+    aspect-ratio: 1;
+    transition: transform .2s;
+  }
+  .galeri-item:hover { transform: scale(1.03); }
+  .galeri-item:nth-child(1) { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; min-height: 280px; font-size: 7rem; }
+  .galeri-item.green-bg { background: linear-gradient(135deg, var(--green-light), var(--green)); }
+  .galeri-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,.6));
+    color: var(--white);
+    font-weight: 800;
+    font-size: .85rem;
+    padding: 20px 14px 12px;
+  }
+  .testimoni-section { margin-top: 56px; }
+  .testi-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.6rem;
+    color: var(--yellow);
+    margin-bottom: 24px;
+  }
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .testi-card {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 20px;
+    padding: 22px;
+    backdrop-filter: blur(4px);
+  }
+  .testi-stars { color: var(--yellow); font-size: 1rem; margin-bottom: 10px; }
+  .testi-text { color: rgba(255,255,255,.85); font-size: .9rem; line-height: 1.6; margin-bottom: 14px; }
+  .testi-author { display: flex; align-items: center; gap: 10px; }
+  .testi-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--yellow);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .testi-name { font-weight: 800; color: var(--white); font-size: .9rem; }
+  .testi-loc { font-size: .75rem; color: rgba(255,255,255,.55); }
+
+  /* ── KONTAK ── */
+  #kontak { background: var(--cream); }
+  .kontak-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 48px; align-items: start; }
+  .kontak-info { display: flex; flex-direction: column; gap: 20px; }
+  .kontak-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 22px 24px;
+    display: flex; align-items: center; gap: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    text-decoration: none; color: inherit;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .kontak-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.1); }
+  .kontak-icon {
+    width: 50px; height: 50px; min-width: 50px;
+    border-radius: 14px;
+    background: var(--yellow);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+  }
+  .kontak-card-title { font-weight: 900; font-size: .95rem; margin-bottom: 3px; }
+  .kontak-card-val { font-size: .85rem; color: var(--gray); }
+  .map-placeholder {
+    background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+    border-radius: 24px;
+    height: 300px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--white);
+    font-weight: 800;
+    gap: 10px;
+    font-size: 1rem;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .map-placeholder .map-emoji { font-size: 4rem; }
+  .map-placeholder p { opacity: .8; font-size: .85rem; text-align: center; padding: 0 20px; }
+  .map-open-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 8px;
+    background: var(--yellow);
+    color: var(--green-dark);
+    font-weight: 900;
+    font-size: .85rem;
+    padding: 8px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+  }
+
+  /* ── CTA STRIP ── */
+  .cta-strip {
+    background: var(--yellow);
+    padding: 60px 5%;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;
+  }
+  .cta-text h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    color: var(--green-dark);
+    margin-bottom: 6px;
+  }
+  .cta-text p { color: var(--green-dark); opacity: .8; font-weight: 600; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--green-dark);
+    color: rgba(255,255,255,.7);
+    padding: 40px 5% 28px;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;
+  }
+  .footer-brand {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    color: var(--yellow);
+    margin-bottom: 6px;
+  }
+  .footer-copy { font-size: .8rem; }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { color: rgba(255,255,255,.65); text-decoration: none; font-size: .85rem; font-weight: 700; transition: color .2s; }
+  .footer-links a:hover { color: var(--yellow); }
+
+  /* ── WA FLOATING ── */
+  .wa-float {
+    position: fixed; bottom: 28px; right: 24px; z-index: 9999;
+    width: 58px; height: 58px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 24px rgba(37,211,102,.5);
+    text-decoration: none;
+    animation: pulse 2.5s infinite;
+    transition: transform .2s;
+  }
+  .wa-float:hover { transform: scale(1.1); }
+  .wa-float svg { width: 30px; height: 30px; fill: white; }
+  .wa-tooltip {
+    position: absolute; right: 70px; top: 50%; transform: translateY(-50%);
+    background: var(--dark);
+    color: var(--white);
+    font-size: .78rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 8px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .2s;
+  }
+  .wa-float:hover .wa-tooltip { opacity: 1; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes floatBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-18px); }
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 4px 24px rgba(37,211,102,.5); }
+    50% { box-shadow: 0 4px 36px rgba(37,211,102,.75); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--green-dark); padding: 20px 5%; gap: 18px; }
+    .nav-links.open { display: flex; }
+    .hamburger { display: flex; }
+    #beranda { padding-bottom: 60px; }
+    .hero-emoji { display: none; }
+    .hero-content { max-width: 100%; }
+    .tentang-grid, .kontak-grid { grid-template-columns: 1fr; }
+    .galeri-grid { grid-template-columns: repeat(2, 1fr); }
+    .galeri-item:nth-child(1) { grid-column: span 2; }
+    .cta-strip { text-align: center; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-logo">🍌 Pisang Keju <span>Zahrah</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#beranda">Beranda</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#tentang">Tentang Kami</a></li>
+    <li><a href="#galeri">Galeri</a></li>
+    <li><a href="#kontak">Kontak</a></li>
+    <li><a href="https://wa.me/6285707390240?text=Halo+Kak%2C+saya+ingin+pesan+Pisang+Keju+Zahrah+ukuran..." class="nav-order" target="_blank">Pesan Sekarang</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="beranda">
+  <div class="hero-bg-circles">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">🏅 Oleh-Oleh Khas Mojokerto</div>
+    <h1 class="hero-title">Pisang Keju <span>Zahrah</span></h1>
+    <p class="hero-sub">Cemilan kekinian dengan topping melimpah & bahan pilihan premium. Cocok untuk oleh-oleh, ngemil bareng keluarga, atau hadiah spesial! 🍌🧀</p>
+    <div class="hero-btns">
+      <a href="https://wa.me/6285707390240?text=Halo+Kak%2C+saya+ingin+pesan+Pisang+Keju+Zahrah+ukuran..." class="btn-primary" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.557 4.126 1.528 5.855L.057 23.854a.75.75 0 0 0 .918.918l6.001-1.471A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.51-5.163-1.4l-.369-.22-3.821.937.953-3.719-.24-.38A9.96 9.96 0 0 1 2 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+        Pesan via WhatsApp
+      </a>
+      <a href="#menu" class="btn-secondary">🍌 Lihat Menu</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">500+</div><div class="stat-lbl">Pelanggan Puas</div></div>
+      <div class="stat"><div class="stat-num">12+</div><div class="stat-lbl">Varian Rasa</div></div>
+      <div class="stat"><div class="stat-num">Fresh</div><div class="stat-lbl">Setiap Hari</div></div>
+    </div>
+  </div>
+  <div class="hero-emoji" aria-hidden="true">🍌</div>
+</section>
+
+<!-- WAVE -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,40 C360,80 1080,0 1440,40 L1440,0 L0,0 Z" fill="#FF8F00"/>
+  </svg>
+</div>
+
+<!-- TENTANG KAMI -->
+<section id="tentang">
+  <div style="max-width:1100px;margin:0 auto">
+    <p class="section-label reveal">🌟 Tentang Kami</p>
+    <h2 class="section-title reveal">Kenapa Pilih <span class="accent">Pisang Keju Zahrah?</span></h2>
+    <p class="section-sub reveal">Kami hadir untuk membawa kebahagiaan melalui cita rasa pisang keju yang autentik, fresh, dan penuh topping melimpah khas Mojokerto.</p>
+    <div class="tentang-grid">
+      <div class="tentang-img-wrap reveal">
+        <div class="tentang-img-box">🍌🧀</div>
+        <div class="tentang-badge">✅ Produk Halal & Fresh Daily</div>
+      </div>
+      <div>
+        <p style="color:var(--gray);line-height:1.8;margin-bottom:20px" class="reveal">
+          <b>Pisang Keju Zahrah</b> adalah oleh-oleh khas Mojokerto yang dibuat dari bahan pilihan dengan topping melimpah dan rasa premium. Kami berkomitmen menghadirkan produk yang fresh setiap hari, cocok untuk oleh-oleh maupun camilan sehari-hari.
+        </p>
+        <div class="tentang-points">
+          <div class="point reveal">
+            <div class="point-icon">🍌</div>
+            <div class="point-text"><h4>Bahan Pilihan Premium</h4><p>Pisang segar berkualitas tinggi dipilih setiap hari untuk menjaga cita rasa terbaik.</p></div>
+          </div>
+          <div class="point reveal">
+            <div class="point-icon">🧀</div>
+            <div class="point-text"><h4>Topping Melimpah</h4><p>Keju, coklat, tiramisu, dan 7+ varian topping glaze eksklusif yang bikin nagih!</p></div>
+          </div>
+          <div class="point reveal">
+            <div class="point-icon">📦</div>
+            <div class="point-text"><h4>Cocok untuk Oleh-Oleh</h4><p>Dikemas rapi dan higienis — pas banget buat buah tangan dari Mojokerto.</p></div>
+          </div>
+          <div class="point reveal">
+            <div class="point-icon">⚡</div>
+            <div class="point-text"><h4>Order Mudah via WhatsApp</h4><p>Pesan langsung, diproses cepat, bisa delivery atau ambil di toko.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div style="max-width:1100px;margin:0 auto">
+    <p class="section-label reveal">🍽 Menu Kami</p>
+    <h2 class="section-title reveal">Pilihan <span class="accent">Menu & Harga</span></h2>
+    <p class="section-sub reveal">Tersedia dalam ukuran Reguler dan Jumbo, dengan berbagai pilihan rasa dan topping glaze premium.</p>
+    <div class="menu-tabs reveal">
+      <button class="tab-btn active" onclick="switchTab('reguler', this)">🍌 Reguler</button>
+      <button class="tab-btn" onclick="switchTab('jumbo', this)">🍌🍌 Jumbo</button>
+      <button class="tab-btn" onclick="switchTab('topping', this)">✨ Topping Glaze</button>
+    </div>
+
+    <!-- Reguler -->
+    <div id="panel-reguler" class="menu-panel active">
+      <div class="menu-grid">
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">🧀</span>
+          <h3>Keju</h3>
+          <div class="price">Rp 14.000</div>
+          <div class="price-note">/ buah</div>
+        </div>
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">🍫</span>
+          <h3>Coklat</h3>
+          <div class="price">Rp 14.000</div>
+          <div class="price-note">/ buah</div>
+        </div>
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">🧀🍫</span>
+          <h3>Keju Coklat</h3>
+          <div class="price">Rp 15.000</div>
+          <div class="price-note">/ buah</div>
+          <div class="menu-card-badge">Favorit</div>
+        </div>
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">🍓</span>
+          <h3>Strawberry</h3>
+          <div class="price">Rp 14.000</div>
+          <div class="price-note">/ buah</div>
+        </div>
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">🍵</span>
+          <h3>Green Tea</h3>
+          <div class="price">Rp 14.000</div>
+          <div class="price-note">/ buah</div>
+        </div>
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">☕</span>
+          <h3>Tiramisu</h3>
+          <div class="price">Rp 15.000</div>
+          <div class="price-note">/ buah</div>
+          <div class="menu-card-badge">Best Seller</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Jumbo -->
+    <div id="panel-jumbo" class="menu-panel">
+      <div class="menu-grid">
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">🧀</span>
+          <h3>Keju Jumbo</h3>
+          <div class="price">Rp 29.000</div>
+          <div class="price-note">/ buah – 2x lebih besar!</div>
+        </div>
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">🍫</span>
+          <h3>Coklat Jumbo</h3>
+          <div class="price">Rp 29.000</div>
+          <div class="price-note">/ buah</div>
+        </div>
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">🧀🍫</span>
+          <h3>Keju Coklat Jumbo</h3>
+          <div class="price">Rp 32.000</div>
+          <div class="price-note">/ buah</div>
+          <div class="menu-card-badge">Favorit</div>
+        </div>
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">☕</span>
+          <h3>Tiramisu Jumbo</h3>
+          <div class="price">Rp 32.000</div>
+          <div class="price-note">/ buah</div>
+          <div class="menu-card-badge">Best Seller</div>
+        </div>
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">🍓</span>
+          <h3>Strawberry Jumbo</h3>
+          <div class="price">Rp 29.000</div>
+          <div class="price-note">/ buah</div>
+        </div>
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">🍵</span>
+          <h3>Green Tea Jumbo</h3>
+          <div class="price">Rp 29.000</div>
+          <div class="price-note">/ buah</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topping -->
+    <div id="panel-topping" class="menu-panel">
+      <div class="menu-grid">
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">☕</span>
+          <h3>Tiramisu Glaze</h3>
+          <div class="price-note" style="font-size:.9rem;font-weight:700;color:var(--green);margin-top:4px">Add-on Premium</div>
+        </div>
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">🫖</span>
+          <h3>Cappucino Glaze</h3>
+          <div class="price-note" style="font-size:.9rem;font-weight:700;color:var(--green);margin-top:4px">Add-on Premium</div>
+        </div>
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">🍵</span>
+          <h3>Green Tea Glaze</h3>
+          <div class="price-note" style="font-size:.9rem;font-weight:700;color:var(--green);margin-top:4px">Add-on Premium</div>
+        </div>
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">🥭</span>
+          <h3>Mango Glaze</h3>
+          <div class="price-note" style="font-size:.9rem;font-weight:700;color:var(--green);margin-top:4px">Add-on Premium</div>
+        </div>
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">🍓</span>
+          <h3>Strawberry Glaze</h3>
+          <div class="price-note" style="font-size:.9rem;font-weight:700;color:var(--green);margin-top:4px">Add-on Premium</div>
+        </div>
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">🍇</span>
+          <h3>Anggur Glaze</h3>
+          <div class="price-note" style="font-size:.9rem;font-weight:700;color:var(--green);margin-top:4px">Add-on Premium</div>
+        </div>
+        <div class="menu-card reveal">
+          <span class="menu-card-emoji">🍫</span>
+          <h3>Dark Choco Glaze</h3>
+          <div class="price-note" style="font-size:.9rem;font-weight:700;color:var(--green);margin-top:4px">Add-on Premium</div>
+          <div class="menu-card-badge">Terlaris</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-order-btn reveal">
+      <a href="https://wa.me/6285707390240?text=Halo+Kak%2C+saya+mau+pesan+Pisang+Keju+Zahrah+%F0%9F%8D%8C+Ukuran%3A+...+Rasa%3A+...+Jumlah%3A+..." class="btn-wa" target="_blank">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.557 4.126 1.528 5.855L.057 23.854a.75.75 0 0 0 .918.918l6.001-1.471A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.51-5.163-1.4l-.369-.22-3.821.937.953-3.719-.24-.38A9.96 9.96 0 0 1 2 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+        Order via WhatsApp Sekarang 🍌
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- GALERI & TESTIMONI -->
+<section id="galeri">
+  <div style="max-width:1100px;margin:0 auto">
+    <p class="section-label reveal">📸 Galeri & Testimoni</p>
+    <h2 class="section-title reveal">Lihat <span class="accent">Produk & Pelanggan Kami</span></h2>
+    <p class="section-sub reveal">Ribuan pelanggan sudah membuktikan kelezatan Pisang Keju Zahrah!</p>
+
+    <div class="galeri-grid">
+      <div class="galeri-item reveal">🍌<div class="galeri-label">Pisang Keju Jumbo Fresh</div></div>
+      <div class="galeri-item green-bg reveal">🧀<div class="galeri-label">Topping Keju Melimpah</div></div>
+      <div class="galeri-item reveal">🍫<div class="galeri-label">Dark Choco Special</div></div>
+      <div class="galeri-item green-bg reveal">📦<div class="galeri-label">Kemasan Oleh-Oleh</div></div>
+      <div class="galeri-item reveal">☕<div class="galeri-label">Tiramisu Glaze</div></div>
+    </div>
+
+    <div class="testimoni-section">
+      <h3 class="testi-title reveal">⭐ Apa Kata Pelanggan Kami?</h3>
+      <div class="testi-grid">
+        <div class="testi-card reveal">
+          <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+          <p class="testi-text">"Beli pas liburan ke Mojokerto, langsung ketagihan! Keju Jumbo-nya gede banget dan toppingnya melimpah. Wajib beli kalau ke sini!"</p>
+          <div class="testi-author">
+            <div class="testi-avatar">👩</div>
+            <div><div class="testi-name">Sari Dewi</div><div class="testi-loc">Surabaya</div></div>
+          </div>
+        </div>
+        <div class="testi-card reveal">
+          <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+          <p class="testi-text">"Udah langganan dari 2022, rasa selalu konsisten dan fresh. Tiramisu Glazenya juara banget! Recommended buat oleh-oleh."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">👨</div>
+            <div><div class="testi-name">Budi Santoso</div><div class="testi-loc">Mojokerto</div></div>
+          </div>
+        </div>
+        <div class="testi-card reveal">
+          <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+          <p class="testi-text">"Pesan buat acara keluarga 30 buah, datang tepat waktu dan masih hangat! Pelayanan ramah, pasti order lagi 🙌"</p>
+          <div class="testi-author">
+            <div class="testi-avatar">👩</div>
+            <div><div class="testi-name">Rini Rahayu</div><div class="testi-loc">Sidoarjo</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAK -->
+<section id="kontak">
+  <div style="max-width:1100px;margin:0 auto">
+    <p class="section-label reveal">📍 Hubungi Kami</p>
+    <h2 class="section-title reveal">Lokasi & <span class="accent">Kontak</span></h2>
+    <p class="section-sub reveal">Kunjungi kami langsung atau hubungi via WhatsApp untuk pemesanan!</p>
+    <div class="kontak-grid">
+      <div class="kontak-info">
+        <a href="https://wa.me/6285707390240" class="kontak-card reveal" target="_blank">
+          <div class="kontak-icon">📱</div>
+          <div><div class="kontak-card-title">WhatsApp / Telepon</div><div class="kontak-card-val">+62 857-0739-0240</div></div>
+        </a>
+        <div class="kontak-card reveal">
+          <div class="kontak-icon">📍</div>
+          <div><div class="kontak-card-title">Alamat Toko</div><div class="kontak-card-val">Jl. Raden Wijaya No.79, Komplek RS DKT, Mojokerto</div></div>
+        </div>
+        <a href="https://instagram.com/pisang_keju_zahrah" class="kontak-card reveal" target="_blank">
+          <div class="kontak-icon">📸</div>
+          <div><div class="kontak-card-title">Instagram</div><div class="kontak-card-val">@pisang_keju_zahrah</div></div>
+        </a>
+        <div class="kontak-card reveal">
+          <div class="kontak-icon">🕐</div>
+          <div><div class="kontak-card-title">Jam Buka</div><div class="kontak-card-val">Senin – Minggu: 09.00 – 21.00 WIB</div></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <a href="https://maps.google.com/?q=Jl.+Raden+Wijaya+No.79+Mojokerto" target="_blank" class="map-placeholder">
+          <div class="map-emoji">🗺️</div>
+          <h4 style="font-family:'Fredoka One',cursive;font-size:1.2rem">Pisang Keju Zahrah</h4>
+          <p>Jl. Raden Wijaya No.79<br>Komplek RS DKT, Mojokerto</p>
+          <span class="map-open-link">🔍 Buka di Google Maps</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <div class="cta-text">
+    <h2>Siap Order Pisang Keju Zahrah? 🍌🧀</h2>
+    <p>Hubungi kami sekarang dan dapatkan pisang keju fresh terenak di Mojokerto!</p>
+  </div>
+  <a href="https://wa.me/6285707390240?text=Halo+Kak%2C+saya+ingin+pesan+Pisang+Keju+Zahrah+%F0%9F%8D%8C" class="btn-wa" target="_blank">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.557 4.126 1.528 5.855L.057 23.854a.75.75 0 0 0 .918.918l6.001-1.471A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.51-5.163-1.4l-.369-.22-3.821.937.953-3.719-.24-.38A9.96 9.96 0 0 1 2 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+    Pesan Sekarang!
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">🍌 Pisang Keju Zahrah</div>
+    <div class="footer-copy">© 2025 Pisang Keju Zahrah. Oleh-Oleh Favorit Mojokerto 🏅</div>
+  </div>
+  <div class="footer-links">
+    <a href="#beranda">Beranda</a>
+    <a href="#menu">Menu</a>
+    <a href="#tentang">Tentang</a>
+    <a href="#galeri">Galeri</a>
+    <a href="#kontak">Kontak</a>
+  </div>
+</footer>
+
+<!-- WA FLOATING BUTTON -->
+<a class="wa-float" href="https://wa.me/6285707390240?text=Halo+Kak%2C+saya+ingin+pesan+Pisang+Keju+Zahrah+ukuran..." target="_blank" aria-label="Chat WhatsApp">
+  <div class="wa-tooltip">Pesan Sekarang 🍌</div>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.557 4.126 1.528 5.855L.057 23.854a.75.75 0 0 0 .918.918l6.001-1.471A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.886 0-3.65-.51-5.163-1.4l-.369-.22-3.821.937.953-3.719-.24-.38A9.96 9.96 0 0 1 2 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+</a>
+
+<script>
+  // Hamburger menu
+  document.getElementById('hamburger').addEventListener('click', function() {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // Tab switching
+  function switchTab(name, btn) {
+    document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
